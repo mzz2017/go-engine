@@ -2,9 +2,9 @@ package spider
 
 import (
 	"fmt"
-	"github.com/esrrhs/go-engine/src/common"
-	"github.com/esrrhs/go-engine/src/loggo"
-	"github.com/esrrhs/go-engine/src/threadpool"
+	"github.com/mzz2017/go-engine/src/common"
+	"github.com/mzz2017/go-engine/src/loggo"
+	"github.com/mzz2017/go-engine/src/threadpool"
 	"sync/atomic"
 	"time"
 )

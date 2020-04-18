@@ -1,11 +1,11 @@
 package evilnet
 
 import (
-	"github.com/esrrhs/go-engine/src/common"
-	"github.com/esrrhs/go-engine/src/loggo"
-	"github.com/esrrhs/go-engine/src/msgmgr"
-	"github.com/esrrhs/go-engine/src/rpc"
-	"github.com/esrrhs/go-engine/src/rudp"
+	"github.com/mzz2017/go-engine/src/common"
+	"github.com/mzz2017/go-engine/src/loggo"
+	"github.com/mzz2017/go-engine/src/msgmgr"
+	"github.com/mzz2017/go-engine/src/rpc"
+	"github.com/mzz2017/go-engine/src/rudp"
 	"github.com/golang/protobuf/proto"
 	"strconv"
 	"sync"

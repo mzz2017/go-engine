@@ -1,9 +1,9 @@
 package spider
 
 import (
-	"github.com/esrrhs/go-engine/src/common"
-	"github.com/esrrhs/go-engine/src/loggo"
-	"github.com/esrrhs/go-engine/src/shell"
+	"github.com/mzz2017/go-engine/src/common"
+	"github.com/mzz2017/go-engine/src/loggo"
+	"github.com/mzz2017/go-engine/src/shell"
 	"math"
 	"net/url"
 	"runtime"

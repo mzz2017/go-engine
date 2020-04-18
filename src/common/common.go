@@ -3,7 +3,7 @@ package common
 import (
 	"archive/zip"
 	"encoding/json"
-	"github.com/esrrhs/go-engine/src/loggo"
+	"github.com/mzz2017/go-engine/src/loggo"
 	"io"
 	"os"
 	"os/exec"
@@ -44,7 +44,7 @@ func Ini() {
 
 	dir := ""
 	for _, p := range gpaths {
-		tmp := p + "/src/github.com/esrrhs/go-engine/"
+		tmp := p + "/src/github.com/mzz2017/go-engine/"
 		tmp = filepath.Clean(tmp)
 		tmp = filepath.ToSlash(tmp)
 		if _, err := os.Stat(tmp); !os.IsNotExist(err) {
