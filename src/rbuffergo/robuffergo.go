@@ -192,7 +192,43 @@ func (b *ROBuffergo) FrontInter() *ROBuffergoInter {
 	}
 }
 
-func (bi *ROBuffergoInter) Next() *ROBuffergoInter {
+func (bi *ROBuffergoInter) Next() (b *ROBuffergoInter) {
+	defer func() {
+		if b == nil {
+			bi.index = bi.startindex
+		}
+	}()
+	//特判x以内的特例，以减少CPU占用
+	sub := bi.index - bi.startindex + 1
+	switch bi.b.Size() {
+	case 0:
+		return nil
+	case 1:
+		if bi.b.flag[bi.index] || (sub > 0 && bi.b.flag[bi.startindex]) {
+			return nil
+		}
+	case 2:
+		if sub > 1 && bi.b.flag[bi.startindex] && bi.b.flag[bi.index] {
+			return nil
+		}
+	}
+	//只要x<len/5，且满足特殊情况sub==bi.b.Size()，就值得一判
+	if sub >= 3 && sub < bi.b.len/5 && sub == bi.b.Size() {
+		flag := true
+		for i := bi.startindex; i <= bi.index; i++ {
+			if !bi.b.flag[i] {
+				flag = false
+				break
+			}
+		}
+		if flag {
+			return nil
+		}
+	}
+	//a := bi.index
+	//defer func() {
+	//	log.Println("searched length:", (bi.index-a+bi.b.len)%bi.b.len, "start:", a, "end:", bi.index, "STARTINDEX:", bi.startindex, "maxlen:", bi.b.len, "size:", bi.b.size)
+	//}()
 	for {
 		bi.index++
 		if bi.index >= bi.b.len {

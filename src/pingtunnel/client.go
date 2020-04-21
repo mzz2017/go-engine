@@ -1,11 +1,11 @@
 package pingtunnel
 
 import (
+	"github.com/golang/protobuf/proto"
 	"github.com/mzz2017/go-engine/src/common"
 	"github.com/mzz2017/go-engine/src/frame"
 	"github.com/mzz2017/go-engine/src/loggo"
 	"github.com/mzz2017/go-engine/src/network"
-	"github.com/golang/protobuf/proto"
 	"golang.org/x/net/icmp"
 	"io"
 	"math"
@@ -377,7 +377,7 @@ func (p *Client) AcceptTcpConn(conn *net.TCPConn, targetAddr string) {
 		left := common.MinOfInt(clientConn.fm.GetSendBufferLeft(), len(bytes))
 		if left > 0 {
 			conn.SetReadDeadline(time.Now().Add(time.Millisecond * 1))
-			n, err := conn.Read(bytes[0:left])
+			n, err := conn.Read(bytes[:left])
 			if err != nil {
 				nerr, ok := err.(net.Error)
 				if !ok || !nerr.Timeout() {
