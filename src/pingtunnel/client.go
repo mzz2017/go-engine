@@ -1,11 +1,11 @@
 package pingtunnel
 
 import (
+	"github.com/golang/protobuf/proto"
 	"github.com/mzz2017/go-engine/src/common"
 	"github.com/mzz2017/go-engine/src/frame"
 	"github.com/mzz2017/go-engine/src/loggo"
 	"github.com/mzz2017/go-engine/src/network"
-	"github.com/golang/protobuf/proto"
 	"golang.org/x/net/icmp"
 	"io"
 	"math"

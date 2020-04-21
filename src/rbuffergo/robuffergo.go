@@ -193,6 +193,15 @@ func (b *ROBuffergo) FrontInter() *ROBuffergoInter {
 }
 
 func (bi *ROBuffergoInter) Next() *ROBuffergoInter {
+	if bi.b.Empty() || (bi.b.Size() == 1 && bi.b.flag[bi.index]) {
+		return nil
+	}
+	//a := bi.index
+	//defer func() {
+	//	if bi.index-a+bi.b.len > 10 && bi.index-a+bi.b.len < 1000 {
+	//		log.Println("searched length:", (bi.index-a+bi.b.len)%bi.b.len, "start:", a, "end:", bi.index, "STARTINDEX:", bi.startindex, "maxlen:", bi.b.len, "size:", bi.b.size)
+	//	}
+	//}()
 	for {
 		bi.index++
 		if bi.index >= bi.b.len {
