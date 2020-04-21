@@ -9,16 +9,18 @@ import (
 )
 
 var (
-	errAddrType      = errors.New("socks addr type not supported")
-	errVer           = errors.New("socks version not supported")
-	errMethod        = errors.New("socks only support 1 method now")
-	errAuthExtraData = errors.New("socks authentication get extra data")
-	errReqExtraData  = errors.New("socks request get extra data")
-	errCmd           = errors.New("socks command not supported")
+	errAddrType        = errors.New("socks addr type not supported")
+	errVer             = errors.New("socks version not supported")
+	errMethod          = errors.New("socks only support 1 method now")
+	errAuthExtraData   = errors.New("socks authentication get extra data")
+	errReqExtraData    = errors.New("socks request get extra data")
+	errCmd             = errors.New("socks command not supported")
+	errCmdUDPAssociate = errors.New("UDP not supported")
 )
 
 const (
-	socksCmdConnect = 1
+	socksCmdConnect      = 1
+	socksCmdUDPAssociate = 3
 )
 
 func Sock5HandshakeBy(conn net.Conn) (err error) {
@@ -87,7 +89,11 @@ func Sock5GetRequest(conn net.Conn) (rawaddr []byte, host string, err error) {
 		return
 	}
 	if buf[idCmd] != socksCmdConnect {
-		err = errCmd
+		if buf[idCmd] == socksCmdUDPAssociate {
+			err = errCmdUDPAssociate
+		} else {
+			err = errCmd
+		}
 		return
 	}
 
